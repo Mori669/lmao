@@ -10,7 +10,7 @@ class User:
         self.age = age
 
     def hash_password(self, password):
-        return int(hashlib.sha256(password.encode()).hexdigest(), 16)
+        return hashlib.md5(password.encode()).hexdigest()
 
 
 # Класс Video
@@ -30,7 +30,7 @@ class UrTube:
         self.current_user = None
 
     def log_in(self, nickname, password):
-        hashed_password = int(hashlib.sha256(password.encode()).hexdigest(), 16)
+        hashed_password = hashlib.md5(password.encode()).hexdigest()
         for user in self.users:
             if user.nickname == nickname and user.password == hashed_password:
                 self.current_user = user
