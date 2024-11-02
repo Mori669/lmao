@@ -1,5 +1,5 @@
 class Product:
-    def __init__(self, name, weight, category):
+    def __init__(self, name: str, weight: float, category: str):
         self.name = name
         self.weight = weight
         self.category = category
@@ -13,26 +13,20 @@ class Shop:
         self.__file_name = 'products.txt'
 
     def get_products(self):
-        with open(self.__file_name, 'r') as file:
-            return file.read()
+        try:
+            with open(self.__file_name, 'r') as file:
+                return file.read()
+        except FileNotFoundError:
+            return ""  # Если файла нет, возвращаем пустую строку
 
     def add(self, *products):
-        existing_products = set()
-
-        with open(self.__file_name, 'r') as file:
-            for line in file:
-                name, weight, _ = line.strip().split(", ")
-                existing_products.add((name, float(weight)))
-
+        existing_products = self.get_products().splitlines()
         with open(self.__file_name, 'a') as file:
             for product in products:
-                if (product.name, product.weight) not in existing_products:
+                if str(product) not in existing_products:
                     file.write(str(product) + '\n')
-                    existing_products.add((product.name, product.weight))
                 else:
                     print(f"Продукт {product} уже есть в магазине")
-
-
 
 
 s1 = Shop()
