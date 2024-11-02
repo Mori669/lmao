@@ -20,5 +20,5 @@ print(f'Команды решили {score_1} и {score_2} задач.')
 
 print(f'Результат битвы: {challenge_result}')
 
-print(f'Среднее время решения одной задачи: {time_avg} с.')
+print(f'Сегодня было решено {tasks_total} задач, в среднем по {time_avg} секунды на задачу!')
 
