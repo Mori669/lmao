@@ -3,14 +3,11 @@ import threading
 
 
 def write_words(word_count, file_name):
-    try:
-        with open(file_name, 'a', encoding='utf-8') as f:
-            for i in range(word_count):
-                f.write(f"Какое-то слово № {i+1}\n")
-                #sleep(1)
-            print(f'Завершилась запись в файл {f}')
-    except FileExistsError:
-        print(f'Файл {file_name} не существует.')
+    with open(file_name, 'a', encoding='utf-8') as f:
+        for i in range(word_count):
+            f.write(f"Какое-то слово № {i+1}\n")
+            #sleep(1)
+        print(f'Завершилась запись в файл {file_name}')
 
 
 start_def_time = time.time()
@@ -43,5 +40,5 @@ for t in threads:
 
 end_thread_time = time.time()
 
-print(end_def_time - start_def_time)
-print(end_thread_time - start_thread_time)
+print(f"Время выполнения последовательного метода: {end_def_time - start_def_time:.2f} секунд")
+print(f"Время выполнения многопоточного метода: {end_thread_time - start_thread_time:.2f} секунд")
